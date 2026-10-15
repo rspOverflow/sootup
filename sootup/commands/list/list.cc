@@ -17,7 +17,7 @@
 #include "list.h"
 
 
-namespace sootup::command {
+namespace sootup::commands {
 
 void List(const Arguments& args) {
   

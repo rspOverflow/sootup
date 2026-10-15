@@ -17,7 +17,7 @@
 #include "uninstall.h"
 
 
-namespace sootup::command {
+namespace sootup::commands {
 
 void Uninstall(const Arguments& args) {
 

@@ -17,7 +17,7 @@
 #include "install.h"
 
 
-namespace sootup::command {
+namespace sootup::commands {
 
 void Install(const Arguments& args) {
 
