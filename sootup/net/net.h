@@ -17,15 +17,13 @@
 #ifndef SOOTUP_NET_NET_H_
 #define SOOTUP_NET_NET_H_
 
-#include <atomic>
 #include <expected>
 #include <filesystem>
+#include <mutex>
 #include <string>
 
 extern "C" {
-
 #include <curl/curl.h>
-
 }
 
 
@@ -47,7 +45,8 @@ class Net {
 
  private:
   inline static bool curl_init_ok = false; // NOTE: Initialized only once
-  inline static std::atomic_int curl_usage_count = 0; // NOTE: Initialized only once
+  inline static int curl_usage_count = 0; // NOTE: Initialized only once
+  inline static std::mutex curl_init_mutex;
 
   CURL* curl = nullptr;
 

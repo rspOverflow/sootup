@@ -17,10 +17,8 @@
 #include "net.h"
 
 extern "C" {
-
 #include <curl/curl.h>
 #include <curl/easy.h>
-
 }
 
 
@@ -31,7 +29,11 @@ Net::Net() {
 }
 
 Net::~Net() {
-  curl_easy_cleanup(curl);
+  if (curl) {
+    curl_easy_cleanup(curl); 
+  }
+
+  std::lock_guard<std::mutex> lock(curl_init_mutex);
 
   if (curl_usage_count != 0) {
     curl_usage_count--;
@@ -39,11 +41,14 @@ Net::~Net() {
 
   if (curl_usage_count <= 0) {
     curl_global_cleanup();
+    curl_init_ok = false;
   }
 }
 
 
 std::expected<Net, NetError> Net::AttemptToAcquireNet() {
+  std::lock_guard<std::mutex> lock(curl_init_mutex);
+
   if (!curl_init_ok) {
     CURLcode global_init_res = curl_global_init(CURL_GLOBAL_DEFAULT);
 
@@ -59,6 +64,8 @@ std::expected<Net, NetError> Net::AttemptToAcquireNet() {
 }
 
 
+NetError Net::DownloadFileToDirectory(const std::string& url_of_file, std::filesystem::path directory) {
 
+}
 
 }
