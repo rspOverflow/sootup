@@ -22,7 +22,7 @@
 namespace sootup {
 
 void App::Execute(const Arguments& args) {
-  if (args.HasNoArguments() || args.GetCommand() == "help") {
+  if (args.HasNoCommand() || args.GetCommand() == "help") {
     return EmitHelp(args);
   }
    

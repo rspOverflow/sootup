@@ -38,9 +38,9 @@ class App {
     // NOTE: We do leak memory here but this is purely to avoid the Static Destruction Order Fiasco.
     static const auto* routing_map = new RoutingMap{
       {"help", Command{EmitHelp, "", "Displays helpful information"}},
-      {"install", Command{commands::Install, "[version]", "Installs the carbon toolchain with optional version. By default, installs latest."}},
-      {"uninstall", Command{commands::Uninstall, "[version]", "Uninstalls the carbon toolchain with optional version. By default, uninstalls latest."}},
-      {"list", Command(commands::List, "[all | installed | available]", "Lists versions of the carbon toolchain available.")}
+      {"install", Command{commands::Install, "[version]", "Installs Carbon toolchain w/ optional version, uninstalls all older versions. By default, installs 'latest'."}},
+      {"uninstall", Command{commands::Uninstall, "", "Uninstalls all Carbon toolchains."}},
+      {"list", Command(commands::List, "[all | installed | available]", "Lists versions of the Carbon toolchain available.")}
     };
     
     return *routing_map;
