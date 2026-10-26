@@ -10,6 +10,14 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 find_package(CURL REQUIRED)
 find_package(libzip REQUIRED)
 
+include(FetchContent)
+FetchContent_Declare(
+  glaze
+  GIT_REPOSITORY https://github.com/stephenberry/glaze.git
+  GIT_TAG v9.0.0
+)
+FetchContent_MakeAvailable(glaze)
+
 
 add_library(soot STATIC
   sootup/args/args.cc
@@ -17,6 +25,7 @@ add_library(soot STATIC
   sootup/commands/install/install.cc
   sootup/commands/uninstall/uninstall.cc
   sootup/commands/list/list.cc
+  sootup/net/net.cc
 )
 target_include_directories(soot PRIVATE
   $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}>
@@ -25,6 +34,7 @@ target_include_directories(soot PRIVATE
 target_link_libraries(soot PRIVATE
   CURL::libcurl
   libzip::zip
+  glaze::glaze
 )
 
 
