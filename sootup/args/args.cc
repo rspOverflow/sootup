@@ -31,7 +31,7 @@ Arguments::Arguments(int argc, char* argv[]) {
         continue;
     }
     
-    misc.emplace_back(std::move(current_argument));
+    arguments.emplace_back(std::move(current_argument));
   }
 }
 

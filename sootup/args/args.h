@@ -29,13 +29,14 @@ class Arguments {
   Arguments(int argc, char* argv[]);
 
   std::string GetCommand() const { return command; }
-  std::span<const std::string> GetMiscellaneousArguments() const { return misc; }
+  std::span<const std::string> GetArguments() const { return arguments; }
 
-  bool HasNoArguments() const { return command.empty() && misc.empty(); }
+  bool HasNoCommand() const { return command.empty(); }
+  bool HasNoArguments() const { return arguments.empty(); }
 
  private:
   std::string command;
-  std::vector<std::string> misc;
+  std::vector<std::string> arguments;
 };
 
 }  // namespace sootup
