@@ -40,7 +40,7 @@ class App {
       {"help", Command{EmitHelp, "", "Displays helpful information"}},
       {"install", Command{commands::Install, "[version]", "Installs Carbon toolchain w/ optional version, uninstalls all older versions. By default, installs 'latest'."}},
       {"uninstall", Command{commands::Uninstall, "", "Uninstalls all Carbon toolchains."}},
-      {"list", Command(commands::List, "[all | installed | available]", "Lists versions of the Carbon toolchain available.")}
+      {"list", Command(commands::List, "Lists the Top 5 latest versions of the Carbon toolchain available.")}
     };
     
     return *routing_map;
