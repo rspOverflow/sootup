@@ -14,13 +14,35 @@
  * limitations under the License.
  */
 
+#include <print>
+
+#include "sootup/net/net.h"
+#include "sootup/net/net_structs.h"
+
 #include "list.h"
 
 
 namespace sootup::commands {
 
 void List(const Arguments& args) {
+  auto net_res = net::AttemptToAcquireNet();
+  if (!net_res.has_value()) {
+    return std::println("sootup: list: failed to acquire network.");
+  }
+
+  Net net{std::move(net_res.value())};
   
+  auto releases_res = net.FetchListOfToolchainReleases();
+  if (!releases_res.has_value()) {
+    return std::println("sootup: list: failed to acquire list of toolchain releases.");
+  }
+
+  std::println("\nLatest Carbon Language toolchain versions available:");
+  std::vector<net::Release> releases = releases_res.value();
+  for (auto rel : releases) {
+    std::println("{}", rel.tag_name);
+  }
+  std::println("");
 }
 
 }
