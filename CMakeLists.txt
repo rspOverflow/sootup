@@ -8,7 +8,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 
 find_package(CURL REQUIRED)
-find_package(libzip REQUIRED)
+find_package(LibArchive REQUIRED)
 
 include(FetchContent)
 FetchContent_Declare(
@@ -33,7 +33,7 @@ target_include_directories(soot PRIVATE
 )
 target_link_libraries(soot PRIVATE
   CURL::libcurl
-  libzip::zip
+  LibArchive::LibArchive
   glaze::glaze
 )
 

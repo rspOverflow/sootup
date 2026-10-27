@@ -1,2 +1,2 @@
 libcurl4-openssl-dev
-libzip-dev
+libarchive-dev
